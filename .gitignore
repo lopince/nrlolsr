@@ -16,3 +16,4 @@ unix/olsrgui
 .Trashes
 ehthumbs.db
 Thumbs.db
+.idea/*
