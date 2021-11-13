@@ -6,7 +6,7 @@ Nrlolsr::Nrlolsr(ProtoDispatcher& theDispatcher, ProtoSocket::Notifier& theNotif
    recvPipe(ProtoPipe::MESSAGE) , smf_pipe(ProtoPipe::MESSAGE) , gui_pipe(ProtoPipe::MESSAGE) , sdt_pipe(ProtoPipe::MESSAGE), console_pipe(ProtoPipe::MESSAGE)
 #ifdef SMF_SUPPORT
    , cap_rcvr(NULL)
-#endif // SMF_SUPPORT
+#endif // SMF_SUPPORT1
 #else
 Nrlolsr::Nrlolsr(ProtoSocket::Notifier& theNotifier, ProtoTimerMgr& theTimer)
  : socket(ProtoSocket::UDP), mac_control_socket(ProtoSocket::UDP)
