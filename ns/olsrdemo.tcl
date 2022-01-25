@@ -125,7 +125,7 @@ if {$val(rp) == "ProtolibMK"} {
     for {set i 0} {$i < $val(nn) } {incr i} {
 	    set p($i) [new Agent/NrlolsrAgent]
 	    $ns_ attach-agent $node_($i) $p($i)
-	    $ns_ at 0.0 "$p($i) startup -tcj .75 -hj .5 -tci 2.5 -hi .5 -d 8 -l /tmp/olsr.log"
+	    $ns_ at 0.0 "$p($i) startup -tcj .75 -hj .5 -tci 2.5 -hi .5 -hp 1500 -d 8 -l /tmp/olsr.log"
 	    [$node_($i) set ragent_] attach-manet $p($i)
 	    $p($i) attach-protolibmk [$node_($i) set ragent_]
     }
@@ -134,96 +134,141 @@ if {$val(rp) == "ProtolibMK"} {
 set totaltime 90.0
 set runtime $totaltime
 
-#Make a 4 nodes in a line
-set nextx 150.0
-set nexty 250.0
+#Make 5 nodes as a clsuter
+
+# cluster1
+set nextx 10.0
+set nexty 10.0
  $node_(0) set X_ $nextx
  $node_(0) set Y_ $nexty
  $ns_ at 0.0 "$node_(0) setdest $nextx $nexty 0.0"
-set nextx 150.0
-set nexty 350.0
+set nextx 16.0
+set nexty 10.0
  $node_(1) set X_ $nextx
  $node_(1) set Y_ $nexty
  $ns_ at 0.0 "$node_(1) setdest $nextx $nexty 0.0"
-set nextx 150.0
-set nexty 450.0
+set nextx 10.0
+set nexty 16.0
  $node_(2) set X_ $nextx
  $node_(2) set Y_ $nexty
  $ns_ at 0.0 "$node_(2) setdest $nextx $nexty 0.0"
-set nextx 350.0
-set nexty 250.0
+set nextx 16.0
+set nexty 16.0
  $node_(3) set X_ $nextx
  $node_(3) set Y_ $nexty
  $ns_ at 0.0 "$node_(3) setdest $nextx $nexty 0.0"
-set nextx 350.0
-set nexty 350.0
+set nextx 13.0
+set nexty 13.0
  $node_(4) set X_ $nextx
  $node_(4) set Y_ $nexty
  $ns_ at 0.0 "$node_(4) setdest $nextx $nexty 0.0"
-set nextx 350.0
-set nexty 450.0
+
+set nextx 70.0
+set nexty 10.0
+ $node_(0) set X_ $nextx
+ $node_(0) set Y_ $nexty
+ $ns_ at 0.0 "$node_(0) setdest $nextx $nexty 0.0"
+set nextx 76.0
+set nexty 10.0
+ $node_(1) set X_ $nextx
+ $node_(1) set Y_ $nexty
+ $ns_ at 0.0 "$node_(1) setdest $nextx $nexty 0.0"
+set nextx 70.0
+set nexty 16.0
+ $node_(2) set X_ $nextx
+ $node_(2) set Y_ $nexty
+ $ns_ at 0.0 "$node_(2) setdest $nextx $nexty 0.0"
+set nextx 76.0
+set nexty 16.0
+ $node_(3) set X_ $nextx
+ $node_(3) set Y_ $nexty
+ $ns_ at 0.0 "$node_(3) setdest $nextx $nexty 0.0"
+set nextx 73.0
+set nexty 13.0
+ $node_(4) set X_ $nextx
+ $node_(4) set Y_ $nexty
+ $ns_ at 0.0 "$node_(4) setdest $nextx $nexty 0.0"
+
+# cluster2
+set nextx 70.0
+set nexty 10.0
  $node_(5) set X_ $nextx
  $node_(5) set Y_ $nexty
  $ns_ at 0.0 "$node_(5) setdest $nextx $nexty 0.0"
-set nextx 550.0
-set nexty 250.0
+set nextx 76.0
+set nexty 10.0
  $node_(6) set X_ $nextx
  $node_(6) set Y_ $nexty
  $ns_ at 0.0 "$node_(6) setdest $nextx $nexty 0.0"
- set nextx 550.0
-set nexty 350.0
+set nextx 70.0
+set nexty 16.0
  $node_(7) set X_ $nextx
  $node_(7) set Y_ $nexty
  $ns_ at 0.0 "$node_(7) setdest $nextx $nexty 0.0"
- set nextx 550.0
-set nexty 450.0
+set nextx 76.0
+set nexty 16.0
  $node_(8) set X_ $nextx
  $node_(8) set Y_ $nexty
  $ns_ at 0.0 "$node_(8) setdest $nextx $nexty 0.0"
-set nextx 750.0
-set nexty 250.0
+set nextx 73.0
+set nexty 13.0
  $node_(9) set X_ $nextx
  $node_(9) set Y_ $nexty
  $ns_ at 0.0 "$node_(9) setdest $nextx $nexty 0.0"
- set nextx 750.0
-set nexty 350.0
+
+# cluster3
+set nextx 10.0
+set nexty 70.0
  $node_(10) set X_ $nextx
  $node_(10) set Y_ $nexty
  $ns_ at 0.0 "$node_(10) setdest $nextx $nexty 0.0"
- set nextx 750.0
-set nexty 450.0
+set nextx 16.0
+set nexty 70.0
  $node_(11) set X_ $nextx
  $node_(11) set Y_ $nexty
  $ns_ at 0.0 "$node_(11) setdest $nextx $nexty 0.0"
- 
-# Take away an MPR
-set nextx 1.0
-set nexty 1.0
-$ns_ at 10.0 "$node_(4) set X_ $nextx"
-$ns_ at 10.0 "$node_(4) set Y_ $nexty"
-$ns_ at 10.0 "$node_(4) setdest $nextx $nexty 0.0"
-# bring back the MPR
-set nextx 350.0
-set nexty 350.0
-$ns_ at 30.0 "$node_(4) set X_ $nextx"
-$ns_ at 30.0 "$node_(4) set Y_ $nexty"
-$ns_ at 30.0 "$node_(4) setdest $nextx $nexty 0.0"
-# take away more
-set nextx 1.0
-set nexty 1.0
-$ns_ at 40.0 "$node_(7) set X_ $nextx"
-$ns_ at 40.0 "$node_(7) set Y_ $nexty"
-$ns_ at 40.0 "$node_(7) setdest $nextx $nexty 0.0"
-$ns_ at 50.0 "$node_(4) set X_ $nextx"
-$ns_ at 50.0 "$node_(4) set Y_ $nexty"
-$ns_ at 50.0 "$node_(4) setdest $nextx $nexty 0.0"
-# Back  MPR
-set nextx 1.0
-set nexty 1.0
-$ns_ at 60.0 "$node_(6) set X_ $nextx"
-$ns_ at 60.0 "$node_(6) set Y_ $nexty"
-$ns_ at 60.0 "$node_(6) setdest $nextx $nexty 0.0"
+set nextx 10.0
+set nexty 76.0
+ $node_(12) set X_ $nextx
+ $node_(12) set Y_ $nexty
+ $ns_ at 0.0 "$node_(12) setdest $nextx $nexty 0.0"
+set nextx 16.0
+set nexty 76.0
+ $node_(13) set X_ $nextx
+ $node_(13) set Y_ $nexty
+ $ns_ at 0.0 "$node_(13) setdest $nextx $nexty 0.0"
+set nextx 13.0
+set nexty 73.0
+ $node_(14) set X_ $nextx
+ $node_(14) set Y_ $nexty
+ $ns_ at 0.0 "$node_(14) setdest $nextx $nexty 0.0"
 
+# cluster4
+set nextx 70.0
+set nexty 70.0
+ $node_(15) set X_ $nextx
+ $node_(15) set Y_ $nexty
+ $ns_ at 0.0 "$node_(15) setdest $nextx $nexty 0.0"
+set nextx 76.0
+set nexty 70.0
+ $node_(16) set X_ $nextx
+ $node_(16) set Y_ $nexty
+ $ns_ at 0.0 "$node_(16) setdest $nextx $nexty 0.0"
+set nextx 70.0
+set nexty 76.0
+ $node_(17) set X_ $nextx
+ $node_(17) set Y_ $nexty
+ $ns_ at 0.0 "$node_(17) setdest $nextx $nexty 0.0"
+set nextx 76.0
+set nexty 76.0
+ $node_(18) set X_ $nextx
+ $node_(18) set Y_ $nexty
+ $ns_ at 0.0 "$node_(18) setdest $nextx $nexty 0.0"
+set nextx 73.0
+set nexty 73.0
+ $node_(19) set X_ $nextx
+ $node_(19) set Y_ $nexty
+ $ns_ at 0.0 "$node_(19) setdest $nextx $nexty 0.0"
 
 # SEtup CBR agents
 
@@ -237,31 +282,59 @@ proc ranstart { first last } {
 
 ns-random 0 # seed the thing heuristically
 set agentstart 5.0
-for {set i 0} {$i < [expr $val(nn)] } {incr i} {
-        set udp($i) [new Agent/UDP]
-        $ns_ attach-agent $node_($i) $udp($i)
- 	set cbr($i) [new Application/Traffic/CBR]
-	$cbr($i) attach-agent $udp($i)
- 	$cbr($i) set packetSize_ 1000
- 	$cbr($i) set interval_ 0.05
-	$cbr($i) set random_ 1
-	ranstart 2.0 5.0
-	$ns_ at $agentstart "$cbr($i) start"
-    }
 
-# Not sure why record function doesn't work with variables specified in naming
-# This is a hack
+set udp(0) [new Agent/UDP]
+$ns_ attach-agent $node_(4) $udp(4)
+set cbr(0) [new Application/Traffic/CBR]
+$cbr(0) attach-agent $udp(0)
+$cbr(0) set packetSize_ 1000
+$cbr(0) set interval_ 0.05
+$cbr(0) set random_ 1
+ranstart 2.0 5.0
+$ns_ at $agentstart "$cbr(0) start"
+
+set udp(1) [new Agent/UDP]
+$ns_ attach-agent $node_(9) $udp(1)
+set cbr(1) [new Application/Traffic/CBR]
+$cbr(1) attach-agent $udp(1)
+$cbr(1) set packetSize_ 1000
+$cbr(1) set interval_ 0.05
+$cbr(1) set random_ 1
+ranstart 2.0 5.0
+$ns_ at $agentstart "$cbr(1) start"
+
+set udp(2) [new Agent/UDP]
+$ns_ attach-agent $node_(14) $udp(2)
+set cbr(2) [new Application/Traffic/CBR]
+$cbr(2) attach-agent $udp(2)
+$cbr(2) set packetSize_ 1000
+$cbr(2) set interval_ 0.05
+$cbr(2) set random_ 1
+ranstart 2.0 5.0
+$ns_ at $agentstart "$cbr(2) start"
+
+set udp(3) [new Agent/UDP]
+$ns_ attach-agent $node_(19) $udp(3)
+set cbr(3) [new Application/Traffic/CBR]
+$cbr(3) attach-agent $udp(3)
+$cbr(3) set packetSize_ 1000
+$cbr(3) set interval_ 0.05
+$cbr(3) set random_ 1
+ranstart 2.0 5.0
+$ns_ at $agentstart "$cbr(3) start"
+
 
 set null1 [new Agent/LossMonitor]
 $ns_ attach-agent $node_(0) $null1
 $ns_ connect $udp(9) $null1
+
 set null2 [new Agent/LossMonitor]
-$ns_ attach-agent $node_(1) $null2
-$ns_ connect $udp(10) $null2
+$ns_ attach-agent $node_(0) $null2
+$ns_ connect $udp(14) $null2
+
 set null3 [new Agent/LossMonitor]
-$ns_ attach-agent $node_(2) $null3
-$ns_ connect $udp(11) $null3
-$cbr(11) set class_ 1
+$ns_ attach-agent $node_(0) $null3
+$ns_ connect $udp(19) $null3
 
 
 
@@ -278,9 +351,9 @@ proc stop {} {
     set bw0 [$null1 set bytes_]
     set bw1 [$null2 set bytes_]
     set bw2 [$null3 set bytes_]
-    puts "Cbr agent0 received [expr $bw0/$runtime*8/1000] Kbps"
-    puts "Cbr agent1 received [expr $bw1/$runtime*8/1000] Kbps"
-    puts "Cbr agent2 received [expr $bw2/$runtime*8/1000] Kbps"
+    puts "Cbr agent0<-9 received [expr $bw0/$runtime*8/1000] Kbps"
+    puts "Cbr agent0<-14 received [expr $bw1/$runtime*8/1000] Kbps"
+    puts "Cbr agent0<-19 received [expr $bw2/$runtime*8/1000] Kbps"
     $ns_ flush-trace
  
     close $tracefd
